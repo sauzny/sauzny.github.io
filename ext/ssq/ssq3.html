@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head> 
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>彩票-排序</title> 
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script> 
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+	<style type="text/css">
+		body{
+			margin: 40px;
+		}
+		#ssq_table1 tr th{
+			text-align: center;
+			color:red;	
+		}
+		
+		#ssq_table1 tr td{
+			text-align: center;
+			color:red;	
+		}
+
+		#ssq_table2 tr th{
+			text-align: center;
+			color:red;	
+			width: 40px;
+		}
+		
+		#ssq_table2 tr td{
+			text-align: center;	
+			color:red;	
+			width: 40px;
+		}
+	</style>
+	<script type="text/javascript" charset="utf-8">
+
+		$(function(){
+		
+			build_table();
+
+			
+			$("#sorting").click(function(){
+				build_div();
+			});
+
+		});
+
+		function build_table(){
+
+			var col_num = $("#col_num").val();
+			
+			for(var i=0;i<col_num;i++){
+				$("#ssq_table1").append('<tr id="1_ssq_tr'+i+'"">'
+				+'<td><input size="1" id="1_ssq_tr'+i+'_h1"/></td>'
+				+'<td><input size="1" id="1_ssq_tr'+i+'_h2"/></td>'
+				+'<td><input size="1" id="1_ssq_tr'+i+'_h3"/></td>'
+				+'<td><input size="1" id="1_ssq_tr'+i+'_h4"/></td>'
+				+'<td><input size="1" id="1_ssq_tr'+i+'_h5"/></td>'
+				+'<td><input size="1" id="1_ssq_tr'+i+'_h6"/></td>'
+				+'<td style="color: blue;"><input size="1" id="1_ssq_tr'+i+'_l1"/></td>'
+				+'</tr>');
+			}
+			
+			for(var i=0;i<col_num;i++){
+				$("#ssq_table2").append('<tr id="2_ssq_tr'+i+'"">'
+				+'<td id="2_ssq_tr'+i+'_h1"/></td>'
+				+'<td id="2_ssq_tr'+i+'_h2"/></td>'
+				+'<td id="2_ssq_tr'+i+'_h3"/></td>'
+				+'<td id="2_ssq_tr'+i+'_h4"/></td>'
+				+'<td id="2_ssq_tr'+i+'_h5"/></td>'
+				+'<td id="2_ssq_tr'+i+'_h6"/></td>'
+				+'<td style="color: blue;" id="2_ssq_tr'+i+'_l1"/></td>'
+				+'</tr>');
+			}
+		}
+
+		function build_div(){
+
+			var col_num = $("#col_num").val();
+			
+			// 填充数据
+			for(var i=0;i<col_num;i++){
+
+				var arr = [];
+
+				arr[0] = $("#1_ssq_tr"+i+"_h1").val();
+				arr[1] = $("#1_ssq_tr"+i+"_h2").val();
+				arr[2] = $("#1_ssq_tr"+i+"_h3").val();
+				arr[3] = $("#1_ssq_tr"+i+"_h4").val();
+				arr[4] = $("#1_ssq_tr"+i+"_h5").val();
+				arr[5] = $("#1_ssq_tr"+i+"_h6").val();
+
+				arr = arr.sort(sortNumber);
+
+				$("#2_ssq_tr"+i+"_h1").text(arr[0]);
+				$("#2_ssq_tr"+i+"_h2").text(arr[1]);
+				$("#2_ssq_tr"+i+"_h3").text(arr[2]);
+				$("#2_ssq_tr"+i+"_h4").text(arr[3]);
+				$("#2_ssq_tr"+i+"_h5").text(arr[4]);
+				$("#2_ssq_tr"+i+"_h6").text(arr[5]);
+				
+				$("#2_ssq_tr"+i+"_l1").text($("#1_ssq_tr"+i+"_l1").val());
+			}
+
+			// 隐藏 展示
+			$("#ssq_table1").hide();
+			$("#ssq_table2").show();
+		}
+
+		function sortNumber(a,b){
+			return a - b;
+		}
+	</script>
+</head> 
+<body>
+	<div>输入&nbsp;&nbsp<input size="1" id="col_num" value="10"/>&nbsp;&nbsp;组号码&nbsp;&nbsp;<button id="build">确认</button></div>
+	<div id="ssq">
+		<table id="ssq_table1">
+			<tr>
+				<th>红1</th>
+				<th>红2</th>
+				<th>红3</th>
+				<th>红4</th>
+				<th>红5</th>
+				<th>红6</th>
+				<th style="color: blue;">蓝</th>
+			</tr>
+		</table>
+		<table id="ssq_table2" style="display: none;">
+			<tr>
+				<th>红1</th>
+				<th>红2</th>
+				<th>红3</th>
+				<th>红4</th>
+				<th>红5</th>
+				<th>红6</th>
+				<th style="color: blue;">蓝</th>
+			</tr>
+		</table>
+	</div>
+	<div>双色球&nbsp;&nbsp;<button id="sorting">排序</button></div>
+</body>
+</html>

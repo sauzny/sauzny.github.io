@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)http://www.html5tricks.com/demo/css3-shake-head-animation/index.html -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>sauzny的个人页</title>
+    <script src="https://gw.alipayobjects.com/as/g/datavis/assets/1.0.1/jquery-3.2.1.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./ythn/style.css" media="screen" type="text/css">
+</head>
+<script type="text/javascript">
+
+console.log("我不会写页面啊！！！");
+
+$(function() {
+
+    $("#next_map3").click(function() {
+        if($("#mp3_audio").attr("src") == "https://github.com/sauzny/sauznygithubio/blob/main/monkey.mp3"){
+            $("#mp3_audio").attr("src", "https://github.com/sauzny/sauznygithubio/blob/main/hero.mp3");
+        }else{
+            $("#mp3_audio").attr("src", "https://github.com/sauzny/sauznygithubio/blob/main/monkey.mp3");
+        }
+    });
+
+});
+
+</script>
+
+<body style="position: static;" class="background">
+    <div class="wrapper">
+        <div style="height: 80px;">
+        </div>
+        <div class="border-circle" id="one"></div>
+        <div class="border-circle" id="two"></div>
+        <div class="background-circle">
+            <div class="triangle-light"></div>
+            <div class="body"></div>
+            <span class="shirt-text">I</span>
+            <span class="shirt-text">♥</span>
+            <span class="shirt-text">JAVA</span>
+            <div class="triangle-dark"></div>
+        </div>
+        <div class="head">
+            <div class="ear" id="left"></div>
+            <div class="ear" id="right"></div>
+            <div class="hair-main">
+                <div class="sideburn" id="left"></div>
+                <div class="sideburn" id="right"></div>
+                <div class="hair-top"></div>
+            </div>
+            <div class="face">
+                <div class="hair-bottom"></div>
+                <div class="nose"></div>
+                <div class="eye-shadow" id="left">
+                    <div class="eyebrow"></div>
+                    <div class="eye"></div>
+                </div>
+                <div class="eye-shadow" id="right">
+                    <div class="eyebrow"></div>
+                    <div class="eye"></div>
+                </div>
+                <div class="mouth"></div>
+                <div class="shadow-wrapper">
+                    <div class="shadow"></div>
+                </div>
+            </div>
+        </div>
+        <span class="music-note" id="one">♫</span>
+        <span class="music-note" id="two">♪</span>
+    </div>
+    <div>
+    </div>
+
+    <!--
+    <div>
+        <audio id="mp3_audio" controls="controls" style="margin-top: 120px" autoplay src="https://github.com/sauzny/sauznygithubio/blob/main/monkey.mp3">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    <button id="next_map3" class="btn btn-primary" type="button">换一首歌</button>
+    <span style="margin-left: 20px;"></span>
+    <a class="btn btn-primary" href="ext/resume/my.html" target="_blank" role="button">我的简介</a>
+    <span style="margin-left: 20px;"></span>
+    <a class="btn btn-primary" href="ext/ssq/ssq2.html" target="_blank" role="button">双色球随机</a>
+    -->
+</body>
+<style type="text/css">
+#yddContainer {
+    display: block;
+    font-family: Microsoft YaHei;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: -4px;
+    left: -4px;
+    font-size: 12px;
+    border: 1px solid
+}
+
+#yddTop {
+    display: block;
+    height: 22px
+}
+
+#yddTopBorderlr {
+    display: block;
+    position: static;
+    height: 17px;
+    padding: 2px 28px;
+    line-height: 17px;
+    font-size: 12px;
+    color: #5079bb;
+    font-weight: bold;
+    border-style: none solid;
+    border-width: 1px
+}
+
+#yddTopBorderlr .ydd-sp {
+    position: absolute;
+    top: 2px;
+    height: 0;
+    overflow: hidden
+}
+
+.ydd-icon {
+    left: 5px;
+    width: 17px;
+    padding: 0px 0px 0px 0px;
+    padding-top: 17px;
+    background-position: -16px -44px
+}
+
+.ydd-close {
+    right: 5px;
+    width: 16px;
+    padding-top: 16px;
+    background-position: left -44px
+}
+
+#yddKeyTitle {
+    float: left;
+    text-decoration: none
+}
+
+#yddMiddle {
+    display: block;
+    margin-bottom: 10px
+}
+
+.ydd-tabs {
+    display: block;
+    margin: 5px 0;
+    padding: 0 5px;
+    height: 18px;
+    border-bottom: 1px solid
+}
+
+.ydd-tab {
+    display: block;
+    float: left;
+    height: 18px;
+    margin: 0 5px -1px 0;
+    padding: 0 4px;
+    line-height: 18px;
+    border: 1px solid;
+    border-bottom: none
+}
+
+.ydd-trans-container {
+    display: block;
+    line-height: 160%
+}
+
+.ydd-trans-container a {
+    text-decoration: none;
+}
+
+#yddBottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 22px;
+    line-height: 22px;
+    overflow: hidden;
+    background-position: left -22px
+}
+
+.ydd-padding010 {
+    padding: 0 10px
+}
+
+#yddWrapper {
+    color: #252525;
+    z-index: 10001;
+    background: url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ab20.png);
+}
+
+#yddContainer {
+    background: #fff;
+    border-color: #4b7598
+}
+
+#yddTopBorderlr {
+    border-color: #f0f8fc
+}
+
+#yddWrapper .ydd-sp {
+    background-image: url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ydd-sprite.png)
+}
+
+#yddWrapper a,
+#yddWrapper a:hover,
+#yddWrapper a:visited {
+    color: #50799b
+}
+
+#yddWrapper .ydd-tabs {
+    color: #959595
+}
+
+.ydd-tabs,
+.ydd-tab {
+    background: #fff;
+    border-color: #d5e7f3
+}
+
+#yddBottom {
+    color: #363636
+}
+
+#yddWrapper {
+    min-width: 250px;
+    max-width: 400px;
+}
+</style>
+
+</html>

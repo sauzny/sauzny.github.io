@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head> 
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>彩票-随机</title> 
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script> 
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+	<style type="text/css">
+		body{
+			margin: 40px;
+		}
+		#message, #qiu1, #qiu2, #qiu3, #qiu4, #qiu5, #qiu6, #qiu7{
+			text-align: center;
+			width: 100%;
+		}
+	</style>
+	<script type="text/javascript" charset="utf-8">
+
+
+		var isStop = false;
+
+		$(function(){
+		
+			// 开始写 jQuery 代码...
+			$("#start").click(function(){
+				isStop = false;
+
+				setTimeout(function(){
+					dong();
+				},100);
+			});
+			$("#stop").click(function(){
+				isStop = true;
+			});
+
+			ssq_div();
+
+
+		});
+
+		function ssq_div(){
+			for(var i=1;i<6;i++){
+				$("#ssq").append('<div id="ssq_div'+i+'" class="col-xs-2 col-sm-3"></div>');
+				for(var j=1;j<7;j++){
+					$("#ssq_div"+i).append('<div id="qiu'+i+'_'+j+'" style="color: red"></div>');
+				}
+				$("#ssq_div"+i).append('<div id="qiu'+i+'_7" style="color: blue"></div>');
+			}
+		}
+
+		function dong(){
+
+			for(var i=1;i<6;i++){
+				ziti(i);
+				hong(i);
+				lan(i);
+			}
+
+			if(!isStop){
+				setTimeout(function(){
+					dong();
+				},100);
+			}
+		}
+
+		function hong(divnum){
+			var allhong = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33];
+			for(var i=0;i<6;i++){
+				var targetindex = Math.floor(Math.random()*(allhong.length-1)+1);
+				if(targetindex != (allhong.length-1)){
+					allhong[allhong.length-1] = allhong[targetindex] + allhong[allhong.length-1];
+					allhong[targetindex] = allhong[allhong.length-1] - allhong[targetindex];
+					allhong[allhong.length-1] = allhong[allhong.length-1] - allhong[targetindex];
+				}
+				$("#qiu"+divnum+"_"+(i+1)).text(allhong.pop());
+			}
+		}
+
+		function lan(divnum){
+			var num=Math.floor(Math.random()*16+1);
+			$("#qiu"+divnum+"_7").text(num);
+		}
+
+		function ziti(divnum){
+			for (var i=1;i<8;i++){
+				$("#qiu"+divnum+"_"+i).css("font-size",20+20*Math.random()+"px");
+			}
+		}
+	</script>
+</head> 
+<body>
+	<div>双色球&nbsp;&nbsp;<button id="start">开始滚动</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id="stop">停止滚动</button></div>
+	<div id="ssq"></div>
+</body>
+</html>

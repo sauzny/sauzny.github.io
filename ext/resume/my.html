@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>我的简介</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://gw.alipayobjects.com/os/antv/assets/lib/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        html,
+        body {
+            /* overflow: hidden; */
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script>/*Fixing iframe window.innerHeight 0 issue in Safari*/document.body.clientHeight;</script>
+    <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g2-3.2.8/dist/g2.min.js"></script>
+    <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.9.6/dist/data-set.min.js"></script>
+    <script src="https://gw.alipayobjects.com/os/antv/assets/lib/lodash-4.17.4.min.js"></script>
+
+    <div class="container">
+        <div class="row">
+            <div id="info1" class="col-xs-12 col-sm-12">
+                <h1>我的简介</h1>
+                <hr />
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div id="info1" class="col-xs-5 col-sm-3">
+                <img src="20161021164425.png" class="img-circle" width="140px">
+            </div>
+            <div id="info2" class="col-xs-5 col-sm-3">
+                <h3>个人信息：</h3>
+                <p>liujinxin</p>
+                <p>tianjin</p>
+                <p>1990,12</p>
+            </div>
+            <div id="info3" class="col-xs-5 col-sm-3">
+                <h3>职业信息：</h3>
+                <p>java研发</p>
+                <p>5年+</p>
+            </div>
+            <div id="info4" class="col-xs-5 col-sm-3">
+                <h3>联系方式：</h3>
+                <p>xinxin_949421@126.com</p>
+                <p><a href="https://github.com/sauzny" target="blank">我的github -> sauzny</a></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <h2>工作经历</h2>
+                <div id="shijian_mountNode"></div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <h2>我的技术</h2>
+                <div id="ciyun_mountNode"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="shijian.js"></script>
+    <script src="ciyun.js"></script>
+</body>
+
+</html>

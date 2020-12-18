@@ -1,0 +1,112 @@
+[
+    {
+        "x": "java",
+        "value": 1000,
+        "category": "java"
+    },
+    {
+        "x": "spring",
+        "value": 900,
+        "category": "java"
+    },
+    {
+        "x": "mybatis",
+        "value": 800,
+        "category": "java"
+    },
+    {
+        "x": "thirft",
+        "value": 700,
+        "category": "microservice"
+    },
+    {
+        "x": "finagle",
+        "value": 600,
+        "category": "microservice"
+    },
+    {
+        "x": "spring cloud",
+        "value": 200,
+        "category": "microservice"
+    },
+    {
+        "x": "dubbo",
+        "value": 100,
+        "category": "microservice"
+    },
+    {
+        "x": "mysql",
+        "value": 800,
+        "category": "db"
+    },
+    {
+        "x": "redis",
+        "value": 700,
+        "category": "db"
+    },
+    {
+        "x": "kafka",
+        "value": 600,
+        "category": "db"
+    },
+    {
+        "x": "zookeeper",
+        "value": 500,
+        "category": "db"
+    },
+    {
+        "x": "cassandra",
+        "value": 400,
+        "category": "db"
+    },
+    {
+        "x": "openldap",
+        "value": 300,
+        "category": "db"
+    },
+    {
+        "x": "python",
+        "value": 300,
+        "category": "backend"
+    },
+    {
+        "x": "docker",
+        "value": 400,
+        "category": "devops"
+    },
+    {
+        "x": "jquery",
+        "value": 300,
+        "category": "frontend"
+    },
+    {
+        "x": "nodejs",
+        "value": 200,
+        "category": "backend"
+    },
+    {
+        "x": "svn",
+        "value": 700,
+        "category": "devops"
+    },
+    {
+        "x": "git",
+        "value": 800,
+        "category": "devops"
+    },
+    {
+        "x": "jenkins",
+        "value": 400,
+        "category": "devops"
+    },
+    {
+        "x": "graphql",
+        "value": 400,
+        "category": "backend"
+    },
+    {
+        "x": "webflux",
+        "value": 200,
+        "category": "java"
+    }
+]
