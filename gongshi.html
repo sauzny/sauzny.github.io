@@ -23,8 +23,17 @@
 
         function foo01() {
             var noWorkDateList = [
-                new Date(2008, 7, 9).getTime(),
-                new Date(2008, 7, 10).getTime()
+                // 月份 要 减1
+                new Date(2021, 1-1, 1).getTime(),
+
+                new Date(2021, 2-1, 11).getTime(),
+                new Date(2021, 2-1, 12).getTime(),
+                new Date(2021, 2-1, 13).getTime(),
+                new Date(2021, 2-1, 14).getTime(),
+                new Date(2021, 2-1, 15).getTime(),
+                new Date(2021, 2-1, 16).getTime(),
+                new Date(2021, 2-1, 17).getTime(),
+                new Date(2021, 2-1, 18).getTime()
             ];
 
 
@@ -120,7 +129,7 @@
                     <button type="button" class="btn btn-default" id="submit">Submit</button>
                 </form>
                 <table class="table">
-                    <caption>没有任何意义的表格</caption>
+                    <caption>没有任何意义的表格，需要排除的日期可以在issues里告诉我！</caption>
                     <thead>
                         <tr>
                             <th>星期一</th>
