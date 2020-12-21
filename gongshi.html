@@ -101,9 +101,12 @@
         }
 
         function foo01() {
+            var today = new Date();
+            var year = today.getFullYear();
+            var month = today.getMonth();
 
-            var year = $("#year").val();
-            var month = $("#month").val() - 1;
+            if($("#year").val() != "") year = $("#year").val();
+            if($("#month").val() != "") month = $("#month").val() - 1;
 
             var workHours = 0;
             var overHours = 0;
@@ -176,8 +179,8 @@
 
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="年" id="year" value="2020" />
-                        <input type="text" class="form-control" placeholder="月" id="month" value="12" />
+                        <input type="text" class="form-control" placeholder="年" id="year" />
+                        <input type="text" class="form-control" placeholder="月" id="month" />
                     </div>
                     <button type="button" class="btn btn-default" id="submit">Submit</button>
                 </form>
