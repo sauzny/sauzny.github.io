@@ -21,26 +21,92 @@
 
         console.log("我不会写页面啊！！！");
 
-        function foo01() {
-            var noWorkDateList = [
+        function specialRulesHoursFun(tempDate) {
+            var result = [-1, -1];
+            // Map<日期, [workHours, overHours]>
+            let specialRuleMap = new Map([
                 // 月份 要 减1
-                new Date(2021, 1-1, 1).getTime(),
+                [new Date(2021, 1 - 1, 1).getTime(), [0, 0]],
 
-                new Date(2021, 2-1, 11).getTime(),
-                new Date(2021, 2-1, 12).getTime(),
-                new Date(2021, 2-1, 13).getTime(),
-                new Date(2021, 2-1, 14).getTime(),
-                new Date(2021, 2-1, 15).getTime(),
-                new Date(2021, 2-1, 16).getTime(),
-                new Date(2021, 2-1, 17).getTime(),
-                new Date(2021, 2-1, 18).getTime()
-            ];
+                [new Date(2021, 2 - 1, 11).getTime(), [0, 0]],
+                [new Date(2021, 2 - 1, 12).getTime(), [0, 0]],
+                [new Date(2021, 2 - 1, 13).getTime(), [0, 0]],
+                [new Date(2021, 2 - 1, 14).getTime(), [0, 0]],
+                [new Date(2021, 2 - 1, 15).getTime(), [0, 0]],
+                [new Date(2021, 2 - 1, 16).getTime(), [0, 0]],
+                [new Date(2021, 2 - 1, 17).getTime(), [0, 0]],
+                [new Date(2021, 2 - 1, 18).getTime(), [0, 0]]
+            ]);
 
+            if(specialRuleMap.has(tempDate.getTime())){
+                result = specialRuleMap.get(tempDate.getTime()); 
+            }
+
+            return result;
+        }
+
+        function workHoursFun(tempDate) {
+            var result = 0;
+            var week = tempDate.getDay();
+
+            switch (week) {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    result = 8;
+                    break;
+                case 6:
+                case 0:
+                    result = 0;
+                    break;
+            }
+
+            var specialRulesHours = specialRulesHoursFun(tempDate);
+            var specialRulesWorkHours = specialRulesHours[0];
+            if(specialRulesWorkHours != -1){
+                result = specialRulesWorkHours;
+            }
+
+            return result;
+        }
+
+        function overHoursFun(tempDate) {
+            var result = 0;
+            var week = tempDate.getDay();
+
+            switch (week) {
+                case 1:
+                case 2:
+                case 4:
+                    result = 2;
+                    break;
+                case 6:
+                    result = 8;
+                    break;
+                case 3:
+                case 5:
+                case 0:
+                    break;
+            }
+
+            var specialRulesHours = specialRulesHoursFun(tempDate);
+            var specialRulesOverHours = specialRulesHours[1];
+            if(specialRulesOverHours != -1){
+                result = specialRulesOverHours;
+            }
+
+            return result;
+        }
+
+        function foo01() {
 
             var year = $("#year").val();
             var month = $("#month").val() - 1;
 
-            var workingHours = 0;
+            var workHours = 0;
+            var overHours = 0;
 
             // 画表格使用
             $("#tbody").html("");
@@ -56,29 +122,16 @@
 
                 if (tempDate.getMonth() != month) break;
 
+                workHours = workHours + workHoursFun(tempDate);
+                overHours = overHours + overHoursFun(tempDate);
+
+                var text = "day: " + tempDate.getDate()
+                    + "</br><span style='color:green'> work: " + workHours + "</span>"
+                    + "</br><span style='color:red'> over: " + overHours + "</span>"
+                    + "</br><span style='color:blue'> total: " + (workHours+overHours) + "</span>"
+                    ;
+
                 var week = tempDate.getDay();
-
-                switch (week) {
-                    case 1:
-                    case 2:
-                    case 4:
-                        if (noWorkDateList.indexOf(tempDate.getTime()) == -1) {
-                            workingHours = workingHours + 10;
-                        }
-                        break;
-                    case 3:
-                    case 5:
-                    case 6:
-                        if (noWorkDateList.indexOf(tempDate.getTime()) == -1) {
-                            workingHours = workingHours + 8;
-                        }
-                        break;
-                    case 0:
-                        break;
-                }
-
-                var text = tempDate.getFullYear() + "-" + (tempDate.getMonth() + 1) + "-" + tempDate.getDate() + "</br><span style='color:red'> " + workingHours + "</span>";
-
 
                 if (i == 0 || week == 1) {
                     $("#tbody").append('<tr id="row' + row + '"></tr>');
