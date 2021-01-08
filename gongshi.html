@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>文档标题</title>
+    <title>算一算</title>
 
     <script src="https://gw.alipayobjects.com/as/g/datavis/assets/1.0.1/jquery-3.2.1.min.js"></script>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
@@ -20,6 +20,12 @@
     <script type="text/javascript">
 
         console.log("我不会写页面啊！！！");
+
+        var today_total_workHours = 0;
+        var today_total_overHours = 0;
+
+        var today_workHours = 0;
+        var today_overHours = 0;
 
         function specialRulesHoursFun(tempDate) {
             var result = [-1, -1];
@@ -103,14 +109,16 @@
 
         function foo01() {
             var today = new Date();
+            //today.setDate(today.getDate() + 1);
             var year = today.getFullYear();
             var month = today.getMonth();
+            var date = today.getDate();
 
             if($("#year").val() != "") year = $("#year").val();
             if($("#month").val() != "") month = $("#month").val() - 1;
 
-            var workHours = 0;
-            var overHours = 0;
+            var total_workHours = 0;
+            var total_overHours = 0;
 
             // 画表格使用
             $("#tbody").html("");
@@ -126,13 +134,16 @@
 
                 if (tempDate.getMonth() != month) break;
 
-                workHours = workHours + workHoursFun(tempDate);
-                overHours = overHours + overHoursFun(tempDate);
+                var temp_workHours = workHoursFun(tempDate);
+                var temp_overHours = overHoursFun(tempDate);
 
-                var text = "day: " + tempDate.getDate()
-                    + "</br><span style='color:green'> work: " + workHours + "</span>"
-                    + "</br><span style='color:red'> over: " + overHours + "</span>"
-                    + "</br><span style='color:blue'> total: " + (workHours+overHours) + "</span>"
+                total_workHours = total_workHours + temp_workHours;
+                total_overHours = total_overHours + temp_overHours;
+
+                var text = "date: " + tempDate.getDate()
+                    + "</br><span style='color:green'> work: " + total_workHours + "</span>"
+                    + "</br><span style='color:red'> over: " + total_overHours + "</span>"
+                    + "</br><span style='color:blue'> total: " + (total_workHours+total_overHours) + "</span>"
                     ;
 
                 var week = tempDate.getDay();
@@ -146,8 +157,18 @@
                         $("#row" + row).append('<td id="row' + row + 'column' + j + '"></tr>');
                     }
                 }
+                
+                // 对于今天的处理
+                var style='style=""';
+                if(date == tempDate.getDate()){
+                    style='style="font-size: 110%; font-weight:bold;"';
+                    today_total_workHours = total_workHours;
+                    today_total_overHours = total_overHours;
+                    today_workHours = temp_workHours;
+                    today_overHours = temp_overHours;
+                }
 
-                $("#row" + row).append('<td id="row' + row + 'column' + column + '">' + text + '</tr>');
+                $("#row" + row).append('<td id="row' + row + 'column' + column + '" ' + style + '>' + text + '</tr>');
                 column = column + 1;
 
                 if (week == 0) {
@@ -157,12 +178,115 @@
             }
         }
 
+        function foo02() {
+            var p1 = $("#p1").val();
+            var c1 = $("#c1").val();
+            var j1 = $("#j1").val();
+            var x1 = $("#x1 option:selected").val();
+            
+            var total = p1*c1;
+
+            var t1 = today_total_workHours + today_total_overHours;
+            var t2 = total;
+            $("#s1_r_t1").text(today_total_workHours + today_total_overHours);
+            $("#s1_r_t2").text(total);
+
+            $("#s1_r_o1").text(today_total_overHours);
+            $("#s1_r_o2").text(j1);
+
+            if(x1 == 1){
+                var t3 = "";
+                if(t2 >= t1){
+                    t3 = "已经超过需要的total：" + (t2-t1) + "小时";
+                }else{
+                    t3 = "还缺少total：" + (t1-t2) + "小时";
+                    if(today_overHours > 0){
+                        if(today_overHours == 2){
+                            t3 = t3 + "<br/>今天20:00下班";
+                        }
+                        if(today_overHours == 8){
+                            t3 = t3 + "<br/>今天18:00下班";
+                        }
+                        var today_total = today_workHours + today_overHours;
+                        if(today_total - (t1-t2) >= 0){
+                            t3 = t3 + "<br/>超过了total："+ (today_total - (t1-t2)) + "小时";
+                        }else{
+                            t3 = t3 + "<br/>还缺少total："+ ((t1-t2) - today_total) + "小时";
+                        }
+                    }else{
+                        if(today_workHours > 0){
+                            if(today_workHours == 8){
+                                t3 = t3 + "<br/>今天18:00下班";
+                            }
+                            if(today_workHours - (t1-t2) >= 0){
+                                t3 = t3 + "<br/>超过了total："+ (today_workHours - (t1-t2)) + "小时";
+                            }else{
+                                t3 = t3 + "<br/>还缺少total："+ ((t1-t2) - today_workHours) + "小时";
+                            }
+                        }else{
+                            t3 = t3 + "<br/>今天别人不上班<br/>你要是不加班<br/>那今天结束还是不够";
+                        }
+
+                    }
+                }
+                $("#s1_r_t3").html(t3);
+
+                var o3 = "";
+                if(j1 >= today_total_overHours){
+                    o3 = "已经超过需要的over：" + (j1-today_total_overHours) + "小时";
+                }else{
+                    o3 = "还缺少over：" + (today_total_overHours-j1) + "小时";
+                    if(today_overHours > 0){
+                        if(today_overHours == 2){
+                            o3 = o3 + "<br/>今天20:00下班";
+                        }
+                        if(today_overHours == 8){
+                            o3 = o3 + "<br/>今天18:00下班";
+                        }
+                        if(today_overHours - (today_total_overHours-j1) >= 0){
+                            o3 = o3 + "<br/>超过了over："+ (today_overHours - (today_total_overHours-j1)) + "小时";
+                        }else{
+                            o3 = o3 + "<br/>还缺少over："+ ((today_total_overHours-j1) - today_overHours) + "小时";
+                        }
+                    }else{
+                        o3 = o3 + "<br/>今天别人不加班<br/>你要是也不加班<br/>那今天结束还是不够";
+                    }
+                }
+                $("#s1_r_o3").html(o3);
+            }
+
+            
+            if(x1 == 2){
+                var t3 = "";
+                if(t2 >= t1){
+                    t3 = "已经超过需要的total：" + (t2-t1) + "小时";
+                }else{
+                    t3 = "还缺少total：" + (t1-t2) + "小时";
+                }
+                $("#s1_r_t3").html(t3);
+
+                var o3 = "";
+                if(j1 >= today_total_overHours){
+                    o3 = "已经超过需要的over：" + (j1-today_total_overHours) + "小时";
+                }else{
+                    o3 = "还缺少over：" + (today_total_overHours-j1) + "小时";
+                }
+                $("#s1_r_o3").html(o3);
+            }
+
+        }
+
 
         $(function () {
             foo01();
 
             $("#submit").click(function () {
                 foo01();
+
+            });
+
+            $("#s1").click(function () {
+                foo02();
 
             });
         });
@@ -175,18 +299,20 @@
     <div class="container" style="margin-top: 20px;">
 
         <div class="row">
-            <div class="col-md-10 col-md-offset-0" style="background-color: rgb(194, 231, 255);box-shadow: 
+            <div class="col-md-10 col-md-offset-0" style="background-color: rgb(194, 246, 255);box-shadow: 
             inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
 
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="年" id="year" />
-                        <input type="text" class="form-control" placeholder="月" id="month" />
+                        年：<input size=2 type="text" class="form-control" placeholder="年" id="year" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        月：<input size=2 type="text" class="form-control" placeholder="月" id="month" /> 
                     </div>
-                    <button type="button" class="btn btn-default" id="submit">Submit</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-default" id="submit">刷日历</button>
                 </form>
                 <table class="table">
-                    <caption>没有任何意义的表格，需要排除的日期可以在issues里告诉我！</caption>
+                    <caption>没有任何意义的表格，需要排除的日期可以在 【<a href="https://github.com/sauzny/sauzny.github.io/issues" target="_blank">issues</a>】 里告诉我</caption>
                     <thead>
                         <tr>
                             <th>星期一</th>
@@ -199,6 +325,55 @@
                         </tr>
                     </thead>
                     <tbody id="tbody">
+                    </tbody>
+                </table>
+                <br/>
+                <form class="navbar-form navbar-left">
+                    <span>去哪个啥的统计里看以一下，填写下面的</span>
+                    <br/>
+                    <br/>
+                    <div class="form-group">
+                        平均工时：<input size=2 type="text" class="form-control" placeholder="工时" id="p1" value="0"/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        出勤天数：<input size=2 type="text" class="form-control" placeholder="天数" id="c1" value="0"/> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        加班小时：<input size=2 type="text" class="form-control" placeholder="小时" id="j1" value="0"/> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>选择今天打卡了吗？</label>
+                        <select id="x1" class="form-control">
+                            <option value="1" >未打卡</option>
+                            <option value="2" >已经打卡</option>
+                        </select>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-default" id="s1">算一算</button>
+                </form>
+                <br/>
+                <br/>
+                <br/>
+                <span id="s1_result"></span>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>应 total</th>
+                            <th>已 total</th>
+                            <th>建议</th>
+                            <th>---</th>
+                            <th>应 over</th>
+                            <th>已 over</th>
+                            <th>建议</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody1">
+                        <tr>
+                            <td id="s1_r_t1">0</td>
+                            <td id="s1_r_t2">0</td>
+                            <td id="s1_r_t3">0</td>
+                            <td>---</td>
+                            <td id="s1_r_o1">0</td>
+                            <td id="s1_r_o2">0</td>
+                            <td id="s1_r_o3">0</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
