@@ -140,10 +140,10 @@
                 total_workHours = total_workHours + temp_workHours;
                 total_overHours = total_overHours + temp_overHours;
 
-                var text = "date: " + tempDate.getDate()
+                var text = "<span style='font-size:30px;'>" + tempDate.getDate() + "号</span>"
                     + "</br><span style='color:green'> work: " + total_workHours + "</span>"
-                    + "</br><span style='color:red'> over: " + total_overHours + "</span>"
-                    + "</br><span style='color:blue'> total: " + (total_workHours+total_overHours) + "</span>"
+                    + "</br><span style='color:red'> over: </br><span style='font-size:40px;'>" + total_overHours + "</span></span>"
+                    + "</br><span style='color:blue'> total: </br><span style='font-size:40px;'>" + (total_workHours+total_overHours) + "</span></span>"
                     ;
 
                 var week = tempDate.getDay();
