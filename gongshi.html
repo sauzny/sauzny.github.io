@@ -161,7 +161,7 @@
                 // 对于今天的处理
                 var style='style=""';
                 if(date == tempDate.getDate()){
-                    style='style="font-size: 120%; font-weight:bold;"';
+                    style='style="font-size: 120%; font-weight:bold; border:3px solid black"';
                     today_total_workHours = total_workHours;
                     today_total_overHours = total_overHours;
                     today_workHours = temp_workHours;
@@ -188,18 +188,18 @@
 
             var t1 = today_total_workHours + today_total_overHours;
             var t2 = total;
-            $("#s1_r_t1").text(today_total_workHours + today_total_overHours);
-            $("#s1_r_t2").text(total);
+            $("#s1_r_t1").text(t1.toFixed(2));
+            $("#s1_r_t2").text(total.toFixed(2));
 
-            $("#s1_r_o1").text(today_total_overHours);
+            $("#s1_r_o1").text(today_total_overHours.toFixed(2));
             $("#s1_r_o2").text(j1);
 
             if(x1 == 1){
                 var t3 = "";
                 if(t2 >= t1){
-                    t3 = "已经超过需要的total：" + (t2-t1) + "小时";
+                    t3 = "已经超过需要的total<br/>超过：" + (t2-t1).toFixed(2) + "小时";
                 }else{
-                    t3 = "还缺少total：" + (t1-t2) + "小时";
+                    t3 = "还缺少total：" + (t1-t2).toFixed(2) + "小时";
                     if(today_overHours > 0){
                         if(today_overHours == 2){
                             t3 = t3 + "<br/>今天20:00下班";
@@ -209,9 +209,9 @@
                         }
                         var today_total = today_workHours + today_overHours;
                         if(today_total - (t1-t2) >= 0){
-                            t3 = t3 + "<br/>超过了total："+ (today_total - (t1-t2)) + "小时";
+                            t3 = t3 + "<br/>超过了total："+ (today_total - (t1-t2)).toFixed(2) + "小时";
                         }else{
-                            t3 = t3 + "<br/>还缺少total："+ ((t1-t2) - today_total) + "小时";
+                            t3 = t3 + "<br/>还缺少total："+ ((t1-t2) - today_total).toFixed(2) + "小时";
                         }
                     }else{
                         if(today_workHours > 0){
@@ -219,9 +219,9 @@
                                 t3 = t3 + "<br/>今天18:00下班";
                             }
                             if(today_workHours - (t1-t2) >= 0){
-                                t3 = t3 + "<br/>超过了total："+ (today_workHours - (t1-t2)) + "小时";
+                                t3 = t3 + "<br/>超过了total："+ (today_workHours - (t1-t2)).toFixed(2) + "小时";
                             }else{
-                                t3 = t3 + "<br/>还缺少total："+ ((t1-t2) - today_workHours) + "小时";
+                                t3 = t3 + "<br/>还缺少total："+ ((t1-t2) - today_workHours).toFixed(2) + "小时";
                             }
                         }else{
                             t3 = t3 + "<br/>今天别人不上班<br/>你要是不加班<br/>那今天结束还是不够";
@@ -233,9 +233,9 @@
 
                 var o3 = "";
                 if(j1 >= today_total_overHours){
-                    o3 = "已经超过需要的over：" + (j1-today_total_overHours) + "小时";
+                    o3 = "已经超过需要的over<br/>超过：" + (j1-today_total_overHours).toFixed(2) + "小时";
                 }else{
-                    o3 = "还缺少over：" + (today_total_overHours-j1) + "小时";
+                    o3 = "还缺少over：" + (today_total_overHours-j1).toFixed(2) + "小时";
                     if(today_overHours > 0){
                         if(today_overHours == 2){
                             o3 = o3 + "<br/>今天20:00下班";
@@ -244,9 +244,9 @@
                             o3 = o3 + "<br/>今天18:00下班";
                         }
                         if(today_overHours - (today_total_overHours-j1) >= 0){
-                            o3 = o3 + "<br/>超过了over："+ (today_overHours - (today_total_overHours-j1)) + "小时";
+                            o3 = o3 + "<br/>超过了over："+ (today_overHours - (today_total_overHours-j1)).toFixed(2) + "小时";
                         }else{
-                            o3 = o3 + "<br/>还缺少over："+ ((today_total_overHours-j1) - today_overHours) + "小时";
+                            o3 = o3 + "<br/>还缺少over："+ ((today_total_overHours-j1) - today_overHours).toFixed(2) + "小时";
                         }
                     }else{
                         o3 = o3 + "<br/>今天别人不加班<br/>你要是也不加班<br/>那今天结束还是不够";
@@ -259,17 +259,17 @@
             if(x1 == 2){
                 var t3 = "";
                 if(t2 >= t1){
-                    t3 = "已经超过需要的total：" + (t2-t1) + "小时";
+                    t3 = "已经超过需要的total<br/>超过：" + (t2-t1).toFixed(2) + "小时";
                 }else{
-                    t3 = "还缺少total：" + (t1-t2) + "小时";
+                    t3 = "还缺少total：" + (t1-t2).toFixed(2) + "小时";
                 }
                 $("#s1_r_t3").html(t3);
 
                 var o3 = "";
                 if(j1 >= today_total_overHours){
-                    o3 = "已经超过需要的over：" + (j1-today_total_overHours) + "小时";
+                    o3 = "已经超过需要的over<br/>超过：" + (j1-today_total_overHours).toFixed(2) + "小时";
                 }else{
-                    o3 = "还缺少over：" + (today_total_overHours-j1) + "小时";
+                    o3 = "还缺少over：" + (today_total_overHours-j1).toFixed(2) + "小时";
                 }
                 $("#s1_r_o3").html(o3);
             }
