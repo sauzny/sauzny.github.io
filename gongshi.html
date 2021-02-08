@@ -35,6 +35,9 @@
                 [new Date(2021, 1 - 1, 1).getTime(), [0, 0]],
                 [new Date(2021, 1 - 1, 2).getTime(), [0, 0]],
 
+                [new Date(2021, 2 - 1, 6).getTime(), [0, 0]],
+                [new Date(2021, 2 - 1, 7).getTime(), [8, 0]],
+
                 [new Date(2021, 2 - 1, 11).getTime(), [0, 0]],
                 [new Date(2021, 2 - 1, 12).getTime(), [0, 0]],
                 [new Date(2021, 2 - 1, 13).getTime(), [0, 0]],
@@ -42,7 +45,9 @@
                 [new Date(2021, 2 - 1, 15).getTime(), [0, 0]],
                 [new Date(2021, 2 - 1, 16).getTime(), [0, 0]],
                 [new Date(2021, 2 - 1, 17).getTime(), [0, 0]],
-                [new Date(2021, 2 - 1, 18).getTime(), [0, 0]]
+                [new Date(2021, 2 - 1, 18).getTime(), [0, 0]],
+
+                [new Date(2021, 2 - 1, 20).getTime(), [8, 2]]
             ]);
 
             if(specialRuleMap.has(tempDate.getTime())){
@@ -141,9 +146,9 @@
                 total_overHours = total_overHours + temp_overHours;
 
                 var text = "<span style='font-size:30px;'>" + tempDate.getDate() + "号</span>"
-                    + "</br><span style='color:green'> work: </br>" + total_workHours + "</span>"
-                    + "</br><span style='color:red'> over: </br><span style='font-size:40px;'>" + total_overHours + "</span></span>"
-                    + "</br><span style='color:blue'> total: </br><span style='font-size:40px;'>" + (total_workHours+total_overHours) + "</span></span>"
+                    + "</br><span style='color:green'> </br>工作: </br><span style='font-size:30px;'>" + total_workHours + "</span></span>"
+                    + "</br><span style='color:red'>   </br>加班: </br><span style='font-size:30px;'>" + total_overHours + "</span></span>"
+                    + "</br><span style='color:blue'>  </br>总计: </br><span style='font-size:30px;'>" + (total_workHours+total_overHours) + "</span></span>"
                     ;
 
                 var week = tempDate.getDay();
@@ -161,11 +166,17 @@
                 // 对于今天的处理
                 var style='style=""';
                 if(date == tempDate.getDate()){
-                    style='style="font-size: 120%; font-weight:bold; border:3px solid black"';
+                    style='style="font-size: 100%; font-weight:bold; border:2px solid black"';
                     today_total_workHours = total_workHours;
                     today_total_overHours = total_overHours;
                     today_workHours = temp_workHours;
                     today_overHours = temp_overHours;
+                }
+
+                if(temp_workHours == 0 && temp_overHours == 0){
+                    text = text.replace("color:green", "color:LightSlateGray");
+                    text = text.replace("color:red", "color:LightSlateGray");
+                    text = text.replace("color:blue", "color:LightSlateGray");
                 }
 
                 $("#row" + row).append('<td id="row' + row + 'column' + column + '" ' + style + '>' + text + '</tr>');
@@ -299,7 +310,7 @@
     <div class="container" style="margin-top: 20px;">
 
         <div class="row">
-            <div class="col-md-10 col-md-offset-0" style="background-color: rgb(194, 246, 255);box-shadow: 
+            <div class="col-md-10 col-md-offset-0" style="background-color:GhostWhite;box-shadow: 
             inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
 
                 <form class="navbar-form navbar-left">
@@ -359,12 +370,12 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>应 total</th>
-                            <th>已 total</th>
+                            <th>应 总计</th>
+                            <th>已 总计</th>
                             <th>建议</th>
                             <th>---</th>
-                            <th>应 over</th>
-                            <th>已 over</th>
+                            <th>应 加班</th>
+                            <th>已 加班</th>
                             <th>建议</th>
                         </tr>
                     </thead>
