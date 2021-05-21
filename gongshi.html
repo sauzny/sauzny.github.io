@@ -22,42 +22,40 @@
         console.log("我不会写页面啊！！！");
 
         var today_total_workHours = 0;
-        var today_total_overHours = 0;
 
         var today_workHours = 0;
-        var today_overHours = 0;
 
         function specialRulesHoursFun(tempDate) {
-            var result = [-1, -1];
-            // Map<日期, [workHours, overHours]>
+            var result = -1;
+            // Map<日期, workHours>
             let specialRuleMap = new Map([
                 // 月份 要 减1
-                [new Date(2021, 1 - 1, 1).getTime(), [0, 0]],
-                [new Date(2021, 1 - 1, 2).getTime(), [0, 0]],
+                [new Date(2021, 1 - 1, 1).getTime(), 0],
+                [new Date(2021, 1 - 1, 2).getTime(), 0],
 
-                [new Date(2021, 2 - 1, 6).getTime(), [0, 0]],
-                [new Date(2021, 2 - 1, 7).getTime(), [8, 0]],
+                [new Date(2021, 2 - 1, 6).getTime(), 0],
+                [new Date(2021, 2 - 1, 7).getTime(), 8],
 
-                [new Date(2021, 2 - 1, 11).getTime(), [0, 0]],
-                [new Date(2021, 2 - 1, 12).getTime(), [0, 0]],
-                [new Date(2021, 2 - 1, 13).getTime(), [0, 0]],
-                [new Date(2021, 2 - 1, 14).getTime(), [0, 0]],
-                [new Date(2021, 2 - 1, 15).getTime(), [0, 0]],
-                [new Date(2021, 2 - 1, 16).getTime(), [0, 0]],
-                [new Date(2021, 2 - 1, 17).getTime(), [0, 0]],
+                [new Date(2021, 2 - 1, 11).getTime(), 0],
+                [new Date(2021, 2 - 1, 12).getTime(), 0],
+                [new Date(2021, 2 - 1, 13).getTime(), 0],
+                [new Date(2021, 2 - 1, 14).getTime(), 0],
+                [new Date(2021, 2 - 1, 15).getTime(), 0],
+                [new Date(2021, 2 - 1, 16).getTime(), 0],
+                [new Date(2021, 2 - 1, 17).getTime(), 0],
 
-                [new Date(2021, 2 - 1, 20).getTime(), [8, 2]],
+                [new Date(2021, 2 - 1, 20).getTime(), 8],
 
-                [new Date(2021, 4 - 1, 3).getTime(), [0, 0]],
-                [new Date(2021, 4 - 1, 5).getTime(), [0, 0]],
-                [new Date(2021, 4 - 1, 24).getTime(), [0, 0]],
-                [new Date(2021, 4 - 1, 25).getTime(), [8, 2]],
+                [new Date(2021, 4 - 1, 3).getTime(), 0],
+                [new Date(2021, 4 - 1, 5).getTime(), 0],
+                [new Date(2021, 4 - 1, 24).getTime(), 0],
+                [new Date(2021, 4 - 1, 25).getTime(), 8],
 
-                [new Date(2021, 5 - 1, 1).getTime(), [0, 0]],
-                [new Date(2021, 5 - 1, 3).getTime(), [0, 0]],
-                [new Date(2021, 5 - 1, 4).getTime(), [0, 0]],
-                [new Date(2021, 5 - 1, 5).getTime(), [0, 0]],
-                [new Date(2021, 5 - 1, 8).getTime(), [8, 0]]
+                [new Date(2021, 5 - 1, 1).getTime(), 0],
+                [new Date(2021, 5 - 1, 3).getTime(), 0],
+                [new Date(2021, 5 - 1, 4).getTime(), 0],
+                [new Date(2021, 5 - 1, 5).getTime(), 0],
+                [new Date(2021, 5 - 1, 8).getTime(), 8]
             ]);
 
             if(specialRuleMap.has(tempDate.getTime())){
@@ -85,38 +83,9 @@
                     break;
             }
 
-            var specialRulesHours = specialRulesHoursFun(tempDate);
-            var specialRulesWorkHours = specialRulesHours[0];
+            var specialRulesWorkHours = specialRulesHoursFun(tempDate);
             if(specialRulesWorkHours != -1){
                 result = specialRulesWorkHours;
-            }
-
-            return result;
-        }
-
-        function overHoursFun(tempDate) {
-            var result = 0;
-            var week = tempDate.getDay();
-
-            switch (week) {
-                case 1:
-                case 2:
-                case 4:
-                    result = 2;
-                    break;
-                case 6:
-                    result = 8;
-                    break;
-                case 3:
-                case 5:
-                case 0:
-                    break;
-            }
-
-            var specialRulesHours = specialRulesHoursFun(tempDate);
-            var specialRulesOverHours = specialRulesHours[1];
-            if(specialRulesOverHours != -1){
-                result = specialRulesOverHours;
             }
 
             return result;
@@ -133,7 +102,6 @@
             if($("#month").val() != "") month = $("#month").val() - 1;
 
             var total_workHours = 0;
-            var total_overHours = 0;
 
             // 画表格使用
             $("#tbody").html("");
@@ -150,15 +118,12 @@
                 if (tempDate.getMonth() != month) break;
 
                 var temp_workHours = workHoursFun(tempDate);
-                var temp_overHours = overHoursFun(tempDate);
 
                 total_workHours = total_workHours + temp_workHours;
-                total_overHours = total_overHours + temp_overHours;
 
                 var text = "<span style='font-size:30px;'>" + tempDate.getDate() + "号</span>"
                     + "</br><span style='color:green'> </br>工作: </br><span style='font-size:30px;'>" + total_workHours + "</span></span>"
-                    + "</br><span style='color:red'>   </br>加班: </br><span style='font-size:30px;'>" + total_overHours + "</span></span>"
-                    + "</br><span style='color:blue'>  </br>总计: </br><span style='font-size:30px;'>" + (total_workHours+total_overHours) + "</span></span>"
+                    + "</br><span style='color:blue'>  </br>总计: </br><span style='font-size:30px;'>" + (1.3*100*total_workHours/100) + "</span></span>"
                     ;
 
                 var week = tempDate.getDay();
@@ -178,14 +143,11 @@
                 if(date == tempDate.getDate()){
                     style='style="font-size: 100%; font-weight:bold; border:2px solid black"';
                     today_total_workHours = total_workHours;
-                    today_total_overHours = total_overHours;
                     today_workHours = temp_workHours;
-                    today_overHours = temp_overHours;
                 }
 
-                if(temp_workHours == 0 && temp_overHours == 0){
+                if(temp_workHours == 0){
                     text = text.replace("color:green", "color:LightSlateGray");
-                    text = text.replace("color:red", "color:LightSlateGray");
                     text = text.replace("color:blue", "color:LightSlateGray");
                 }
 
@@ -199,106 +161,8 @@
             }
         }
 
-        function foo02() {
-            var p1 = $("#p1").val();
-            var c1 = $("#c1").val();
-            var j1 = $("#j1").val();
-            var x1 = $("#x1 option:selected").val();
-            
-            var total = p1*c1;
-
-            var t1 = today_total_workHours + today_total_overHours;
-            var t2 = total;
-            $("#s1_r_t1").text(t1.toFixed(2));
-            $("#s1_r_t2").text(total.toFixed(2));
-
-            $("#s1_r_o1").text(today_total_overHours.toFixed(2));
-            $("#s1_r_o2").text(j1);
-
-            if(x1 == 1){
-                var t3 = "";
-                if(t2 >= t1){
-                    t3 = "已经超过需要的total<br/>超过：" + (t2-t1).toFixed(2) + "小时";
-                }else{
-                    t3 = "还缺少total：" + (t1-t2).toFixed(2) + "小时";
-                    if(today_overHours > 0){
-                        if(today_overHours == 2){
-                            t3 = t3 + "<br/>今天20:00下班";
-                        }
-                        if(today_overHours == 8){
-                            t3 = t3 + "<br/>今天18:00下班";
-                        }
-                        var today_total = today_workHours + today_overHours;
-                        if(today_total - (t1-t2) >= 0){
-                            t3 = t3 + "<br/>超过了total："+ (today_total - (t1-t2)).toFixed(2) + "小时";
-                        }else{
-                            t3 = t3 + "<br/>还缺少total："+ ((t1-t2) - today_total).toFixed(2) + "小时";
-                        }
-                    }else{
-                        if(today_workHours > 0){
-                            if(today_workHours == 8){
-                                t3 = t3 + "<br/>今天18:00下班";
-                            }
-                            if(today_workHours - (t1-t2) >= 0){
-                                t3 = t3 + "<br/>超过了total："+ (today_workHours - (t1-t2)).toFixed(2) + "小时";
-                            }else{
-                                t3 = t3 + "<br/>还缺少total："+ ((t1-t2) - today_workHours).toFixed(2) + "小时";
-                            }
-                        }else{
-                            t3 = t3 + "<br/>今天别人不上班<br/>你要是不加班<br/>那今天结束还是不够";
-                        }
-
-                    }
-                }
-                $("#s1_r_t3").html(t3);
-
-                var o3 = "";
-                if(j1 >= today_total_overHours){
-                    o3 = "已经超过需要的over<br/>超过：" + (j1-today_total_overHours).toFixed(2) + "小时";
-                }else{
-                    o3 = "还缺少over：" + (today_total_overHours-j1).toFixed(2) + "小时";
-                    if(today_overHours > 0){
-                        if(today_overHours == 2){
-                            o3 = o3 + "<br/>今天20:00下班";
-                        }
-                        if(today_overHours == 8){
-                            o3 = o3 + "<br/>今天18:00下班";
-                        }
-                        if(today_overHours - (today_total_overHours-j1) >= 0){
-                            o3 = o3 + "<br/>超过了over："+ (today_overHours - (today_total_overHours-j1)).toFixed(2) + "小时";
-                        }else{
-                            o3 = o3 + "<br/>还缺少over："+ ((today_total_overHours-j1) - today_overHours).toFixed(2) + "小时";
-                        }
-                    }else{
-                        o3 = o3 + "<br/>今天别人不加班<br/>你要是也不加班<br/>那今天结束还是不够";
-                    }
-                }
-                $("#s1_r_o3").html(o3);
-            }
-
-            
-            if(x1 == 2){
-                var t3 = "";
-                if(t2 >= t1){
-                    t3 = "已经超过需要的total<br/>超过：" + (t2-t1).toFixed(2) + "小时";
-                }else{
-                    t3 = "还缺少total：" + (t1-t2).toFixed(2) + "小时";
-                }
-                $("#s1_r_t3").html(t3);
-
-                var o3 = "";
-                if(j1 >= today_total_overHours){
-                    o3 = "已经超过需要的over<br/>超过：" + (j1-today_total_overHours).toFixed(2) + "小时";
-                }else{
-                    o3 = "还缺少over：" + (today_total_overHours-j1).toFixed(2) + "小时";
-                }
-                $("#s1_r_o3").html(o3);
-            }
-
-        }
-
-
         $(function () {
+
             foo01();
 
             $("#submit").click(function () {
@@ -306,10 +170,6 @@
 
             });
 
-            $("#s1").click(function () {
-                foo02();
-
-            });
         });
 
     </script>
@@ -351,57 +211,6 @@
                     <tbody id="tbody">
                     </tbody>
                 </table>
-                <!--
-                <br/>
-                <form class="navbar-form navbar-left">
-                    <span>去哪个啥的统计里看以一下，填写下面的</span>
-                    <br/>
-                    <br/>
-                    <div class="form-group">
-                        平均工时：<input size=2 type="text" class="form-control" placeholder="工时" id="p1" value="0"/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        出勤天数：<input size=2 type="text" class="form-control" placeholder="天数" id="c1" value="0"/> 
-                        <br/>
-                        <span style="color: red;">加班小时：</span><input size=2 type="text" class="form-control" placeholder="小时" id="j1" value="0"/> 
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <label>今天打卡了吗？</label>
-                        <select id="x1" class="form-control">
-                            <option value="1" >未打卡</option>
-                            <option value="2" >已经打卡</option>
-                        </select>
-                        &nbsp;&nbsp;
-                        <button type="button" class="btn btn-default" id="s1">算一算</button>
-                    </div>
-                </form>
-                <br/>
-                <br/>
-                <br/>
-                <span id="s1_result"></span>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>应 总计</th>
-                            <th>已 总计</th>
-                            <th>建议</th>
-                            <th>---</th>
-                            <th>应 加班</th>
-                            <th>已 加班</th>
-                            <th>建议</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody1">
-                        <tr>
-                            <td id="s1_r_t1">0</td>
-                            <td id="s1_r_t2">0</td>
-                            <td id="s1_r_t3">0</td>
-                            <td>---</td>
-                            <td id="s1_r_o1">0</td>
-                            <td id="s1_r_o2">0</td>
-                            <td id="s1_r_o3">0</td>
-                        </tr>
-                    </tbody>
-                </table>
-                -->
             </div>
         </div>
     </div>
