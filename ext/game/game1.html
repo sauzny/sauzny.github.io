@@ -41,39 +41,13 @@
 			});
 		});
 
-        function sleep(duration) {
-            return new Promise(resolve => {
-                setTimeout(resolve, duration);
-            })
-        }
+      function sleep(duration) {
+          return new Promise(resolve => {
+              setTimeout(resolve, duration);
+          })
+      }
 
-        async function changeColor(duration) {
-
-            $("#col_0_0").removeClass("col_red");
-            $("#col_0_1").removeClass("col_red");
-            $("#col_0_2").removeClass("col_red");
-            $("#col_1_0").removeClass("col_red");
-            $("#col_1_1").removeClass("col_red");
-            $("#col_1_2").removeClass("col_red");
-            $("#col_2_0").removeClass("col_red");
-            $("#col_2_1").removeClass("col_red");
-            $("#col_2_2").removeClass("col_red");
-
-            var r_index = Math.floor(Math.random()*3);    // 可均衡获取 0 到 2 的随机整数。
-            var c_index = Math.floor(Math.random()*3);    // 可均衡获取 0 到 2 的随机整数。
-            $("#col_"+r_index+"_"+c_index).addClass("col_red");
-            await sleep(duration);
-            console.log("#col_"+r_index+"_"+c_index);
-        }
-
-        async function dong(){
-            for(var i=1;i<6;i++){
-                await changeColor(200);
-            }
-            await hahaha();
-        }
-
-        async function hahaha(){
+      async function changeColor(duration) {
 
           $("#col_0_0").removeClass("col_red");
           $("#col_0_1").removeClass("col_red");
@@ -85,8 +59,34 @@
           $("#col_2_1").removeClass("col_red");
           $("#col_2_2").removeClass("col_red");
 
-          $("#haha_1").addClass("show");
-        }
+          var r_index = Math.floor(Math.random()*3);    // 可均衡获取 0 到 2 的随机整数。
+          var c_index = Math.floor(Math.random()*3);    // 可均衡获取 0 到 2 的随机整数。
+          $("#col_"+r_index+"_"+c_index).addClass("col_red");
+          await sleep(duration);
+          console.log("#col_"+r_index+"_"+c_index);
+      }
+
+      async function dong(){
+          for(var i=1;i<60;i++){
+              await changeColor(50);
+          }
+          await hahaha();
+      }
+
+      async function hahaha(){
+
+        $("#col_0_0").removeClass("col_red");
+        $("#col_0_1").removeClass("col_red");
+        $("#col_0_2").removeClass("col_red");
+        $("#col_1_0").removeClass("col_red");
+        $("#col_1_1").removeClass("col_red");
+        $("#col_1_2").removeClass("col_red");
+        $("#col_2_0").removeClass("col_red");
+        $("#col_2_1").removeClass("col_red");
+        $("#col_2_2").removeClass("col_red");
+
+        $("#haha_1").addClass("show");
+      }
 
 	</script>
 </head> 
