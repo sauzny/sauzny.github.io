@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head> 
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>游戏</title> 
+	<!-- 1 -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    
+    <!-- 新 Bootstrap5 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+    
+    <!--  popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>
+    
+    <!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+    <style type="text/css">
+		body{
+			margin: 40px;
+		}
+		#message, #qiu1, #qiu2, #qiu3, #qiu4, #qiu5, #qiu6, #qiu7{
+			text-align: center;
+			width: 100%;
+		}
+        .col {
+            border: 2px solid rgb(0, 0, 0);
+            margin: 3px;
+        }
+        .col_red {
+            border: 2px solid rgb(255, 0, 0);
+        }
+	</style>
+	<script type="text/javascript" charset="utf-8">
+
+		$(function(){
+			// 开始写 jQuery 代码...
+			$("#start_button").click(function(){
+				$("#start_button").addClass("disabled");
+        dong();
+			});
+		});
+
+        function sleep(duration) {
+            return new Promise(resolve => {
+                setTimeout(resolve, duration);
+            })
+        }
+
+        async function changeColor(duration) {
+
+            $("#col_0_0").removeClass("col_red");
+            $("#col_0_1").removeClass("col_red");
+            $("#col_0_2").removeClass("col_red");
+            $("#col_1_0").removeClass("col_red");
+            $("#col_1_1").removeClass("col_red");
+            $("#col_1_2").removeClass("col_red");
+            $("#col_2_0").removeClass("col_red");
+            $("#col_2_1").removeClass("col_red");
+            $("#col_2_2").removeClass("col_red");
+
+            var r_index = Math.floor(Math.random()*3);    // 可均衡获取 0 到 2 的随机整数。
+            var c_index = Math.floor(Math.random()*3);    // 可均衡获取 0 到 2 的随机整数。
+            $("#col_"+r_index+"_"+c_index).addClass("col_red");
+            await sleep(duration);
+            console.log("#col_"+r_index+"_"+c_index);
+        }
+
+        async function dong(){
+            for(var i=1;i<6;i++){
+                await changeColor(200);
+            }
+            await hahaha();
+        }
+
+        async function hahaha(){
+
+          $("#col_0_0").removeClass("col_red");
+          $("#col_0_1").removeClass("col_red");
+          $("#col_0_2").removeClass("col_red");
+          $("#col_1_0").removeClass("col_red");
+          $("#col_1_1").removeClass("col_red");
+          $("#col_1_2").removeClass("col_red");
+          $("#col_2_0").removeClass("col_red");
+          $("#col_2_1").removeClass("col_red");
+          $("#col_2_2").removeClass("col_red");
+
+          $("#haha_1").addClass("show");
+        }
+
+	</script>
+</head> 
+<body>
+	<div class="container">
+        <div class="row">
+            <div class="col" id="col_0_0">
+              给宝贝买奶茶x9
+            </div>
+            <div class="col" id="col_0_1">
+              给宝贝买奶茶x9
+            </div>
+            <div class="col" id="col_0_2">
+              给宝贝买奶茶x9
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" id="col_1_0">
+              给宝贝买奶茶x9
+            </div>
+            <div class="col" id="col_1_1">
+              给宝贝买奶茶x9
+            </div>
+            <div class="col" id="col_1_2">
+              给宝贝买奶茶x9
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" id="col_2_0">
+              给宝贝买奶茶x9
+            </div>
+            <div class="col" id="col_2_1">
+              给宝贝买奶茶x9
+            </div>
+            <div class="col" id="col_2_2">
+              给宝贝买奶茶x9
+            </div>
+        </div>
+    </div>
+	<div class="container">
+    <div class="row">
+        <div class="col" style="border: 0px;">
+            <button id="start_button" type="button" class="btn btn-primary">开始抽奖</button>
+        </div>
+<!-- 
+        <div class="col" style="border: 0px;">
+            <button id="stop_button" type="button" class="btn btn-primary">停止抽奖</button>
+        </div>
+         -->
+    </div>
+  </div>
+  <div id="haha_1" class="alert alert-info alert-dismissible fade">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>未中奖，别灰心！</strong>(*^_^*)
+  </div>
+</body>
+</html>
