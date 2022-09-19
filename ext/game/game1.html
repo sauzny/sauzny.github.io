@@ -37,43 +37,25 @@
 			// 开始写 jQuery 代码...
 			$("#start_button").click(function(){
 				$("#start_button").addClass("disabled");
+				$("#haha_1").removeClass("show");
         dong();
 			});
+
+			$("#again_button").click(function(){
+				$("#start_button").removeClass("disabled");
+				$("#haha_1").removeClass("show");
+			});
+
 		});
+    
 
-      function sleep(duration) {
-          return new Promise(resolve => {
-              setTimeout(resolve, duration);
-          })
-      }
+    function sleep(duration) {
+        return new Promise(resolve => {
+            setTimeout(resolve, duration);
+        })
+    }
 
-      async function changeColor(duration) {
-
-          $("#col_0_0").removeClass("col_red");
-          $("#col_0_1").removeClass("col_red");
-          $("#col_0_2").removeClass("col_red");
-          $("#col_1_0").removeClass("col_red");
-          $("#col_1_1").removeClass("col_red");
-          $("#col_1_2").removeClass("col_red");
-          $("#col_2_0").removeClass("col_red");
-          $("#col_2_1").removeClass("col_red");
-          $("#col_2_2").removeClass("col_red");
-
-          var r_index = Math.floor(Math.random()*3);    // 可均衡获取 0 到 2 的随机整数。
-          var c_index = Math.floor(Math.random()*3);    // 可均衡获取 0 到 2 的随机整数。
-          $("#col_"+r_index+"_"+c_index).addClass("col_red");
-          await sleep(duration);
-          console.log("#col_"+r_index+"_"+c_index);
-      }
-
-      async function dong(){
-          for(var i=1;i<60;i++){
-              await changeColor(50);
-          }
-          await hahaha();
-      }
-
-      async function hahaha(){
+    async function changeColor(duration) {
 
         $("#col_0_0").removeClass("col_red");
         $("#col_0_1").removeClass("col_red");
@@ -85,8 +67,34 @@
         $("#col_2_1").removeClass("col_red");
         $("#col_2_2").removeClass("col_red");
 
-        $("#haha_1").addClass("show");
-      }
+        var r_index = Math.floor(Math.random()*3);    // 可均衡获取 0 到 2 的随机整数。
+        var c_index = Math.floor(Math.random()*3);    // 可均衡获取 0 到 2 的随机整数。
+        $("#col_"+r_index+"_"+c_index).addClass("col_red");
+        await sleep(duration);
+        console.log("#col_"+r_index+"_"+c_index);
+    }
+
+    async function dong(){
+        for(var i=1;i<60;i++){
+            await changeColor(50);
+        }
+        await hahaha();
+    }
+
+    async function hahaha(){
+
+      $("#col_0_0").removeClass("col_red");
+      $("#col_0_1").removeClass("col_red");
+      $("#col_0_2").removeClass("col_red");
+      $("#col_1_0").removeClass("col_red");
+      $("#col_1_1").removeClass("col_red");
+      $("#col_1_2").removeClass("col_red");
+      $("#col_2_0").removeClass("col_red");
+      $("#col_2_1").removeClass("col_red");
+      $("#col_2_2").removeClass("col_red");
+
+      $("#haha_1").addClass("show");
+    }
 
 	</script>
 </head> 
@@ -131,16 +139,42 @@
         <div class="col" style="border: 0px;">
             <button id="start_button" type="button" class="btn btn-primary">开始抽奖</button>
         </div>
-<!-- 
+        
         <div class="col" style="border: 0px;">
-            <button id="stop_button" type="button" class="btn btn-primary">停止抽奖</button>
+            <button id="again_button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">再来一次</button>
         </div>
-         -->
+        
     </div>
   </div>
   <div id="haha_1" class="alert alert-info alert-dismissible fade">
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     <strong>未中奖，别灰心！</strong>(*^_^*)
+  </div>
+
+  <!-- 模态框 -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- 模态框头部 -->
+        <div class="modal-header">
+          <h4 class="modal-title">祝你好运</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- 模态框内容 -->
+        <div class="modal-body">
+          支付1毛钱，再来一次吧！(●ˇ∀ˇ●)
+          <img src="game1.jpg" class="img-fluid" alt="Cinque Terre"> 
+        </div>
+
+        <!-- 模态框底部 -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">关闭</button>
+        </div>
+
+      </div>
+    </div>
   </div>
 </body>
 </html>
