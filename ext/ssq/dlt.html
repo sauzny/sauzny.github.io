@@ -19,10 +19,10 @@
 	</style>
 	<script type="text/javascript" charset="utf-8">
 
-
 		var isStop = false;
 
 		$(function(){
+			init_create_table();
 		
 			// 开始写 jQuery 代码...
 			$("#start").click(function(){
@@ -35,29 +35,33 @@
 			$("#stop").click(function(){
 				isStop = true;
 			});
-
-			ssq_div();
-
+			
 
 		});
 
-		function ssq_div(){
+		function init_create_table(){
 			for(var i=1;i<6;i++){
-				$("#ssq").append('<div id="ssq_div'+i+'" class="col-xs-2 col-sm-3"></div>');
-				for(var j=1;j<6;j++){
-					$("#ssq_div"+i).append('<div id="qiu'+i+'_'+j+'" style="color: red"></div>');
+				$("#table5").append('<tr id="z'+i+'"></tr>');
+				for(var hn=1;hn<6;hn++){
+					$("#z"+i).append('<td style="color: red;" id="h_'+i+'_'+hn+'"></td>');
 				}
-				$("#ssq_div"+i).append('<div id="qiu'+i+'_6" style="color: blue"></div>');
-				$("#ssq_div"+i).append('<div id="qiu'+i+'_7" style="color: blue"></div>');
+				for(var ln=1;ln<3;ln++){
+					$("#z"+i).append('<td style="color: blue;" id="l_'+i+'_'+ln+'"></td>');
+				}
 			}
 		}
 
 		function dong(){
 
 			for(var i=1;i<6;i++){
-				ziti(i);
-				hong(i);
-				lan(i);
+				var hong_arr = hong_shuffle_slice(5);
+				var lan_arr = lan_shuffle_slice(2);
+				for(var hn=1;hn<6;hn++){
+					$('#h_'+i+'_'+hn).text(hong_arr[hn-1]);
+				}
+				for(var ln=1;ln<3;ln++){
+					$('#l_'+i+'_'+ln).text(lan_arr[ln-1]);
+				}
 			}
 
 			if(!isStop){
@@ -67,41 +71,55 @@
 			}
 		}
 
-		function hong(divnum){
+		function shuffle(array) {  
+			var currentIndex = array.length, temporaryValue, randomIndex;  
+			
+			// 当还剩有元素需要洗牌时  
+			while (0 !== currentIndex) {  
+			
+				// 选取一个剩余元素  
+				randomIndex = Math.floor(Math.random() * currentIndex);  
+				currentIndex -= 1;  
+			
+				// 并与当前元素交换  
+				temporaryValue = array[currentIndex];  
+				array[currentIndex] = array[randomIndex];  
+				array[randomIndex] = temporaryValue;  
+			}  
+			
+			return array;  
+		}  
+
+		function hong_shuffle_slice(x){
 			var allhong = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35];
-			for(var i=0;i<5;i++){
-				var targetindex = Math.floor(Math.random()*(allhong.length-1)+1);
-				if(targetindex != (allhong.length-1)){
-					allhong[allhong.length-1] = allhong[targetindex] + allhong[allhong.length-1];
-					allhong[targetindex] = allhong[allhong.length-1] - allhong[targetindex];
-					allhong[allhong.length-1] = allhong[allhong.length-1] - allhong[targetindex];
-				}
-				$("#qiu"+divnum+"_"+(i+1)).text(allhong.pop());
-			}
+			return shuffle(allhong).slice(0, x);
 		}
 
-		function lan(divnum){
+		function lan_shuffle_slice(x){
 			var alllan = [1,2,3,4,5,6,7,8,9,10,11,12];
-			for(var i=5;i<7;i++){
-				var targetindex = Math.floor(Math.random()*(alllan.length-1)+1);
-				if(targetindex != (alllan.length-1)){
-					alllan[alllan.length-1] = alllan[targetindex] + alllan[alllan.length-1];
-					alllan[targetindex] = alllan[alllan.length-1] - alllan[targetindex];
-					alllan[alllan.length-1] = alllan[alllan.length-1] - alllan[targetindex];
-				}
-				$("#qiu"+divnum+"_"+(i+1)).text(alllan.pop());
-			}
+			return shuffle(alllan).slice(0, x);
 		}
 
-		function ziti(divnum){
-			for (var i=1;i<8;i++){
-				$("#qiu"+divnum+"_"+i).css("font-size",20+20*Math.random()+"px");
-			}
-		}
 	</script>
 </head> 
 <body>
-	<div>大乐透&nbsp;&nbsp;<button id="start">开始滚动</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id="stop">停止滚动</button></div>
-	<div id="ssq"></div>
+	<div>大乐透随机 5 注&nbsp;&nbsp;<button id="start">开始滚动</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id="stop">停止滚动</button></div>
+	<!-- <div id="ssq"></div> -->
+	<hr/>
+	<div class="table-responsive">
+		<table class="table table-striped" id="table5">
+			<tr>
+				<th style="color: red;">红1</th>
+				<th style="color: red;">红2</th>
+				<th style="color: red;">红3</th>
+				<th style="color: red;">红4</th>
+				<th style="color: red;">红5</th>
+				<th style="color: blue;">蓝1</th>
+				<th style="color: blue;">蓝2</th>
+			</tr>
+		</table>
+	</div>
+
+	
 </body>
 </html>
