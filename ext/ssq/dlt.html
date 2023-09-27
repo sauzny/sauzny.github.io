@@ -87,6 +87,9 @@
 			var fs_hong_num = $('#fs_hong_num').val()
 			var fs_lan_num = $('#fs_lan_num').val()
 
+			var total_num = calculateCombinations(fs_hong_num, fs_lan_num);
+			$('#total_num').text(total_num);
+
 			var hong_arr = hong_shuffle_slice(fs_hong_num);
 			var lan_arr = lan_shuffle_slice(fs_lan_num);
 
@@ -129,6 +132,26 @@
 			return shuffle(alllan).slice(0, x);
 		}
 
+
+		function calculateCombinations(m, n) {  
+			// 计算组合数  
+			function calculateCombination(total, choose) {  
+				let result = 1;  
+				for (let i = 0; i < choose; i++) {  
+					result *= total - i;  
+					result /= i + 1;  
+				}  
+				return result;  
+			}  
+		
+			// 计算从m个元素中选择5个的组合数  
+			let combination1 = calculateCombination(m, 5);  
+			// 计算从n个元素中选择2个的组合数  
+			let combination2 = calculateCombination(n, 2);  
+		
+			// 返回总的组合数  
+			return combination1 * combination2;  
+		}
 	</script>
 </head> 
 <body>
@@ -156,7 +179,7 @@
 		<button id="fs_stop">停止滚动</button>
 		<br/>
 		<br/>
-		红球数量&nbsp;&nbsp;
+		红球数&nbsp;&nbsp;
 		<select id="fs_hong_num">
 			<option value="5">5</option>
 			<option value="6" selected>6</option>
@@ -165,9 +188,8 @@
 			<option value="9">9</option>
 		  </select>
 		&nbsp;&nbsp;
-		蓝球数量&nbsp;&nbsp;
+		蓝球数&nbsp;&nbsp;
 		<select id="fs_lan_num">
-			<option value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
 			<option value="4" selected>4</option>
@@ -176,6 +198,8 @@
 			<option value="7">7</option>
 			<option value="8">8</option>
 		</select>
+		&nbsp;&nbsp;
+		注数&nbsp;&nbsp;<span id="total_num">待计算</span>
 	</div>
 	<!-- <div id="ssq"></div> -->
 	<hr/>
