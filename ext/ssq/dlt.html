@@ -20,6 +20,7 @@
 	<script type="text/javascript" charset="utf-8">
 
 		var isStop = false;
+		var fs_isStop = false;
 
 		$(function(){
 			init_create_table();
@@ -36,6 +37,16 @@
 				isStop = true;
 			});
 			
+			$("#fs_start").click(function(){
+				fs_isStop = false;
+
+				setTimeout(function(){
+					fs_dong();
+				},100);
+			});
+			$("#fs_stop").click(function(){
+				fs_isStop = true;
+			});
 
 		});
 
@@ -67,6 +78,24 @@
 			if(!isStop){
 				setTimeout(function(){
 					dong();
+				},100);
+			}
+		}
+
+		function fs_dong(){
+
+			var fs_hong_num = $('#fs_hong_num').val()
+			var fs_lan_num = $('#fs_lan_num').val()
+
+			var hong_arr = hong_shuffle_slice(fs_hong_num);
+			var lan_arr = lan_shuffle_slice(fs_lan_num);
+
+			$('#fs_hong').text(hong_arr);
+			$('#fs_lan').text(lan_arr);
+
+			if(!fs_isStop){
+				setTimeout(function(){
+					fs_dong();
 				},100);
 			}
 		}
@@ -107,7 +136,7 @@
 	<!-- <div id="ssq"></div> -->
 	<hr/>
 	<div class="table-responsive">
-		<table class="table table-striped" id="table5">
+		<table class="table table-striped" id="table5" style="font-size: large;">
 			<tr>
 				<th style="color: red;">红1</th>
 				<th style="color: red;">红2</th>
@@ -120,6 +149,48 @@
 		</table>
 	</div>
 
+	<hr/>
+
+	<div>大乐透随机 复式 &nbsp;&nbsp;
+		<button id="fs_start">开始滚动</button>&nbsp;&nbsp;
+		<button id="fs_stop">停止滚动</button>
+		<br/>
+		<br/>
+		红球数量&nbsp;&nbsp;
+		<select id="fs_hong_num">
+			<option value="5">5</option>
+			<option value="6" selected>6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+		  </select>
+		&nbsp;&nbsp;
+		蓝球数量&nbsp;&nbsp;
+		<select id="fs_lan_num">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4" selected>4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+		</select>
+	</div>
+	<!-- <div id="ssq"></div> -->
+	<hr/>
+	<div class="table-responsive">
+		<table class="table table-striped" id="fs_table" style="font-size: large;">
+			<tr>
+				<th style="color: red;">红</th>
+				<th style="color: blue;">蓝</th>
+			</tr>
+			<tr>
+				<td id="fs_hong" style="color: red;"></td>
+				<td id="fs_lan" style="color: blue; width: 100px;"></td>
+			</tr>
+		</table>
+	</div>
 	
 </body>
 </html>
